@@ -1,12 +1,9 @@
 /*
 Copyright © 2023 NAME HERE <EMAIL ADDRESS>
-
 */
 package cmd
 
 import (
-	"fmt"
-
 	"github.com/spf13/cobra"
 )
 
@@ -21,7 +18,8 @@ Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("group called")
+
+		// ParseGroup()
 	},
 }
 
@@ -38,3 +36,18 @@ func init() {
 	// is called directly, e.g.:
 	// groupCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
+
+// func ParseGroup() {
+// 	symbols := os.Args[2:]
+// 	f, err := os.Create("./config/stocklist")
+// 	if err != nil {
+// 		log.Fatal(err)
+// 	}
+// 	defer f.Close()
+// 	for i := range symbols {
+
+// 		f.Write([]byte(symbols[i]))
+// 	}
+// 	f.Sync()
+
+// }

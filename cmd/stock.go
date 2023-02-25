@@ -5,10 +5,9 @@ package cmd
 
 import (
 	"fmt"
-	"log"
+	"github/austinmorales/moneyme/logic"
 	"os"
 
-	"github.com/piquette/finance-go/quote"
 	"github.com/spf13/cobra"
 )
 
@@ -18,16 +17,13 @@ var stockCmd = &cobra.Command{
 	Short: "returns the current market price of the requested stock",
 	Long:  ``,
 	Run: func(cmd *cobra.Command, args []string) {
-		if len(args) == 0 {
-			fmt.Println("Error: not enough arguments, try `moneyme -h` for all commands")
-			return
+		if len(os.Args) == 3 {
+			price := logic.StockPrice(os.Args[2])
+			fmt.Printf("%v: $%v\n", os.Args[2], price)
+		} else {
+			fmt.Println("invalid syntax, try adding -h to the end of the command you wish to run")
 		}
-		stock, err := StockPrice(os.Args[2])
-		if err != nil {
-			log.Fatal(err)
-			return
-		}
-		fmt.Printf("%v (live): %v\n", os.Args[2], stock)
+
 	},
 }
 
@@ -43,19 +39,4 @@ func init() {
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
 	// stockCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
-}
-
-func StockPrice(ticker string) (float64, error) {
-	q, err := quote.Get(ticker)
-	if err != nil || q == nil {
-		fmt.Println("Check inputted symbol for typos")
-		os.Exit(1)
-	}
-	// if q.Symbol != ticker {
-	// 	os.Exit(1)
-	// }
-	// if err == nil {
-	// 	log.Fatal("Fatal error, check for typos in stock symbol/ticker")
-	// }
-	return q.RegularMarketPrice, nil
 }

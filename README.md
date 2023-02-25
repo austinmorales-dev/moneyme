@@ -3,12 +3,3 @@
 
 basic usage: moneyme stock [*symbol*]
 
-## Features:
-- Pull live stock prices a la carte 
-
-
-
-
-### To do:
-- Reach full test coverage
-- Assign symbols to groups using -group
